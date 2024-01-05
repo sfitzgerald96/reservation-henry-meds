@@ -1,15 +1,13 @@
 class AvailabilitiesController < ApplicationController
-  # GET /availabilities
-  def index
-    @availabilities = Availability.all
+  # GET /availabilities/available
+  def possible_timeslots
+    @availabilities = Availability.where('end_time > ?', 24.hours.from_now)
+    @reservations = Reservation.where('end_time > ?', 24.hours.from_now)
+    slot_builder = AvailabilitySlotBuilder.new(@availabilities, @reservations)
 
-    render json: @availabilities
-  end
+    @availability_slots = slot_builder.build_slots
 
-  # GET /availabilities/1
-  def show
-    @availability = Availability.find(params[:id])
-    render json: @availability
+    render json: @availability_slots
   end
 
   # POST /availabilities
@@ -21,22 +19,6 @@ class AvailabilitiesController < ApplicationController
     else
       render json: @availability.errors, status: :unprocessable_entity
     end
-  end
-
-  # PATCH/PUT /availabilities/1
-  def update
-    @availability = Availability.find(params[:id])
-    if @availability.update(availability_params)
-      render json: @availability
-    else
-      render json: @availability.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /availabilities/1
-  def destroy
-    @availability = Availability.find(params[:id])
-    @availability.destroy!
   end
 
   private
