@@ -1,6 +1,4 @@
 class ProvidersController < ApplicationController
-  before_action :set_provider, only: %i[ show update destroy ]
-
   # GET /providers
   def index
     @providers = Provider.all
@@ -10,6 +8,7 @@ class ProvidersController < ApplicationController
 
   # GET /providers/1
   def show
+    @provider = Provider.find(params[:id])
     render json: @provider
   end
 
@@ -26,6 +25,7 @@ class ProvidersController < ApplicationController
 
   # PATCH/PUT /providers/1
   def update
+    @provider = Provider.find(params[:id])
     if @provider.update(provider_params)
       render json: @provider
     else
@@ -35,17 +35,14 @@ class ProvidersController < ApplicationController
 
   # DELETE /providers/1
   def destroy
+    @provider = Provider.find(params[:id])
     @provider.destroy!
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_provider
-      @provider = Provider.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def provider_params
-      params.require(:provider).permit(:first_name, :last_name, :office_address, :phone_number)
-    end
+  # Only allow a list of trusted parameters through.
+  def provider_params
+    params.require(:provider).permit(:first_name, :last_name, :office_address, :phone_number)
+  end
 end
