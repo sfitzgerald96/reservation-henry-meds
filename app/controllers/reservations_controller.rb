@@ -2,8 +2,7 @@ class ReservationsController < ApplicationController
   # POST /reservations
   def create
     @reservation = Reservation.new(reservation_params)
-    ## TODO: Finish create logic so you can only create a reservation if the timeslot is available
-
+    # TODO: Finish create logic so you can only create a reservation if the timeslot is available
 
     if @reservation.save
       render json: @reservation, status: :created

@@ -11,6 +11,7 @@ class AvailabilitySlotBuilder
       slots.concat(build_slots_for_availability(availability))
     end
 
+    # TODO: Only return slots that are greater than 24 hours away
     slots.reject { |slot| slot_has_reservation?(slot) }
   end
 

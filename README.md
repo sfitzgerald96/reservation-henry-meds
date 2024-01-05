@@ -1,24 +1,7 @@
-# README
+# What I ran out of time for
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Unit Tests
+- Authentication so that only providers could create appointments
+- Authentication so that only clients could create make reservations
+- Search repo for "TODO:" Only return slots that are greater than 24 hours away
+- Search repo for "TODO:" Finish create logic so you can only create a reservation if the timeslot is available
